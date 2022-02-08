@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{path?}', function () {
-    return view('app');
-});
+Route::get('{any}', function () {
+    return view('app'); // or wherever your React app is bootstrapped.
+})->where('any', '.*');
