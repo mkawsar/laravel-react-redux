@@ -1,5 +1,5 @@
 const constants = {
-    HOST_URL: 'http://54.95.79.53',
+    HOST_URL: 'http://127.0.0.1:8000/api/v1',
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

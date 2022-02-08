@@ -9,7 +9,7 @@ export default function configureAppStore(preloadedState) {
         reducer: rootReducer,
         middleware: [...getDefaultMiddleware(), sagaMiddleware],
         preloadedState,
-    })
+    });
     sagaMiddleware.run(rootSaga)
 
     if (process.env.NODE_ENV !== 'production' && module.hot) {
