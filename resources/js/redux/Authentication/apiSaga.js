@@ -1,5 +1,4 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
-import action from "./action";
 import actions from './action';
 import {
     getCustomRequest,
@@ -14,9 +13,9 @@ function* login(action) {
     try {
         yield call(() => getCustomRequest('sanctum/csrf-cookie'));
         const response = yield call(() => postRequest('auth/login', action.payload));
-        yield put({type: actions.LOGIN_SUCCESS, payload: response.data});
+        yield put({ type: actions.LOGIN_SUCCESS, payload: response.data });
     } catch (error) {
-        yield put({type: action.LOGIN_FAILURE});
+        yield put({ type: action.LOGIN_FAILURE });
         if (error.response.status === 401) {
             message.error(error.response.data.message);
         } else {
@@ -28,10 +27,10 @@ function* login(action) {
 function* register(action) {
     try {
         const response = yield call(() => postRequest('auth/register', action.payload));
-        yield put({type: actions.REGISTER_SUCCESS, payload: response.data});
+        yield put({ type: actions.REGISTER_SUCCESS, payload: response.data });
     } catch (error) {
-        yield put({type: actions.REGISTER_FAILURE});
-        if(error.response.status === 422) {
+        yield put({ type: actions.REGISTER_FAILURE });
+        if (error.response.status === 422) {
             message.error(error.response.data.errors.join(','));
         } else {
             message.error('Something Went Wrong');
@@ -42,18 +41,18 @@ function* register(action) {
 function* getAuthUser() {
     try {
         const response = yield call(() => getRequest('auth/user'));
-        yield put({type: actions.GET_AUTH_USER_SUCCESS, payload: response.data});
+        yield put({ type: actions.GET_AUTH_USER_SUCCESS, payload: response.data });
     } catch (error) {
-        yield put({type: actions.GET_AUTH_USER_FAILURE});
+        yield put({ type: actions.GET_AUTH_USER_FAILURE });
     }
 }
 
 function* logout() {
     try {
         yield call(() => deleteRequest('auth/logout'));
-        yield put({type: actions.LOGOUT_SUCCESS});
+        yield put({ type: actions.LOGOUT_SUCCESS });
     } catch (err) {
-        yield put({type: actions.LOGOUT_FAILURE});
+        yield put({ type: actions.LOGOUT_FAILURE });
     }
 }
 
